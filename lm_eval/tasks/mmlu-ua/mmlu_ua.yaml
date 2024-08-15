@@ -1,0 +1,29 @@
+task: mmlu-ua
+tag:
+  - mmlu
+  - multilingual
+  - ukrainian
+  - uk
+  - ua
+
+dataset_path: PolyAgent/mmlu # the name of the dataset on the HF Hub.
+# dataset_path: hellaswag # the name of the dataset on the HF Hub.
+dataset_name: null # the dataset configuration to use. Leave `null` if your dataset does not require a config to be passed. See https://huggingface.co/docs/datasets/load_hub#configurations for more info.
+dataset_kwargs: # any extra keyword arguments that should be passed to the dataset constructor, e.g. `data_dir`.
+  trust_remote_code: true
+
+test_split: test
+fewshot_split: null #<split name to draw fewshot examples from, or `null`>
+
+fewshot_config:
+  sampler: first_n
+output_type: multiple_choice
+doc_to_text: "{{question.strip()}}\nA. {{choices[0]}}\nB. {{choices[1]}}\nC. {{choices[2]}}\nD. {{choices[3]}}\nAnswer:"
+doc_to_choice: ["A", "B", "C", "D"]
+doc_to_target: answer
+metric_list:
+  - metric: acc
+    aggregation: mean
+    higher_is_better: true
+metadata:
+  version: 1.0
