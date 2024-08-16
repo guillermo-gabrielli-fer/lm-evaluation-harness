@@ -1,3 +1,10 @@
+# Fork Note!
+
+This fork is to work on MMLU-UA task that is based on Ukrainian translation of [PolyAgent/mmlu](https://huggingface.co/datasets/PolyAgent/mmlu).
+
+There is not need to use this fork outside of usuing `mmlu-ua` task
+
+==================
 # Language Model Evaluation Harness
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10256836.svg)](https://doi.org/10.5281/zenodo.10256836)
