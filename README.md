@@ -2,7 +2,7 @@
 
 This fork is to work on MMLU-UA task that is based on Ukrainian translation of [PolyAgent/mmlu](https://huggingface.co/datasets/PolyAgent/mmlu).
 
-There is not need to use this fork outside of usuing `mmlu-ua` task
+There is no need to use this fork outside of usuing `mmlu-ua` task, please use the original repo for any other use-cases.
 
 ==================
 # Language Model Evaluation Harness
