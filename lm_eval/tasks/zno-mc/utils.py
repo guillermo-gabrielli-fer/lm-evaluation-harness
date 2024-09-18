@@ -41,7 +41,7 @@ def process_docs(dataset: datasets.Dataset):
 """
  
 def doc_to_choice(doc) -> str:
-   return [choice['text'] for choice in doc['answers']]
+   return [f"{choice['marker']}. {choice['text']}" for choice in doc['answers']]
    
 def doc_to_target(doc) -> int:
    """ Returns the index of the correct answer (4 or 5 options)"""
@@ -50,4 +50,4 @@ def doc_to_target(doc) -> int:
 def doc_to_text(doc) -> str:
     """ Returns the text of the question"""
     choices = "\n".join([f"{choice['marker']}. {choice['text']}" for choice in doc['answers']])
-    return f"{doc['question'].strip()}\n{choices}\nВідповідь:"
+    return f"Ти повинен вибрати єдиний правильний варіант. \n{doc['question'].strip()}\n{choices}\nВідповідь:"
