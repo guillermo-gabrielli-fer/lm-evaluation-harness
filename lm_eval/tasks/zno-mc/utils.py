@@ -47,7 +47,16 @@ def doc_to_target(doc) -> int:
    """ Returns the index of the correct answer (4 or 5 options)"""
    return ['А', 'Б', 'В', 'Г', 'Д'].index(doc['correct_answers'][0])
 
-def doc_to_text(doc) -> str:
+def doc_to_text(doc,mode='marker',answer=False) -> str:
     """ Returns the text of the question"""
-    choices = "\n".join([f"{choice['marker']}. {choice['text']}" for choice in doc['answers']])
-    return f"Ти повинен вибрати єдиний правильний варіант. \n{doc['question'].strip()}\n{choices}\nВідповідь:"
+    
+    if mode == 'marker':
+       choices = "\n".join([f"{choice['marker']}" for choice in doc['answers']])
+    elif mode == 'text':
+       choices = "\n".join([f"{choice['text']}" for choice in doc['answers']])
+    else:
+        choices = "\n".join([f"{choice['marker']}. {choice['text']}" for choice in doc['answers']])
+    suffix = "\nТвоя відповідь повинна містити тільки букву." if mode == 'marker' else ''
+    suffix += "\nВідповідь:" if answer else ""
+    return f"Ти повинен вибрати єдиний правильний варіант. \n{doc['question'].strip()}\n{choices}{suffix}"
+
