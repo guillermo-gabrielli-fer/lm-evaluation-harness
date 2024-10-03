@@ -18,13 +18,13 @@ tag:
 #doc_to_target: answer
 
 
-#dataset_path: PolyAgent/custom_zno # the name of the dataset on the HF Hub. TODO: make this work with a private dataset
-dataset_path: json
+dataset_path: PolyAgent/custom_zno # the name of the dataset on the HF Hub. TODO: make this work with a private dataset
+#dataset_path: json # local file for testing
 dataset_name: null # the dataset configuration to use. Leave `null` if your dataset does not require a config to be passed. See https://huggingface.co/docs/datasets/load_hub#configurations for more info.
 dataset_kwargs: # any extra keyword arguments that should be passed to the dataset constructor, e.g. `data_dir`.
   trust_remote_code: true
-  data_files: 
-    test: zno-history-fixed.jsonl
+  #data_files: 
+  #  test: zno-history-fixed.jsonl
 
 test_split: test
 fewshot_split: null #<split name to draw fewshot examples from, or `null`>

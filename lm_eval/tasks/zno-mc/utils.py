@@ -47,7 +47,7 @@ def doc_to_target(doc) -> int:
    """ Returns the index of the correct answer (4 or 5 options)"""
    return ['А', 'Б', 'В', 'Г', 'Д'].index(doc['correct_answers'][0])
 
-def doc_to_text(doc,mode='marker',answer=False) -> str:
+def doc_to_text(doc,mode='marker',answer=True) -> str:
     """ Returns the text of the question"""
     
     if mode == 'marker':
