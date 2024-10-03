@@ -1,18 +1,8 @@
 import datasets
 
-def process_docs(dataset: datasets.Dataset):
-    def _helper(doc):
-      # modifies the contents of a single
-      # document in our dataset.
-      doc["choices"] = [doc["choice1"], doc["choice2"], doc["wrong_answer"]]
-      doc["gold"] = doc["label"]
-      return doc
-
-    return dataset.map(_helper) # returns back a datasets.Dataset object
-
-
 
 """
+Example:
 {
     "question": "Кого з великих київських князів історик О. Субтельний охарактеризував\nтак:\n«Його слов’янське ім’я, варязьке виховання, кочовий спосіб життя віддзеркалювали поєднання європейського та азіатського начал. Його управління\nознаменувало апогей ранньої героїчної доби в історії Київської Русі»?",
     "answers": [
@@ -39,6 +29,17 @@ def process_docs(dataset: datasets.Dataset):
     "subject": "ukrainian-history"
 }
 """
+
+
+def process_docs(dataset: datasets.Dataset):
+    def _helper(doc):
+      # modifies the contents of a single
+      # document in our dataset.
+      doc["choices"] = [doc["choice1"], doc["choice2"], doc["wrong_answer"]]
+      doc["gold"] = doc["label"]
+      return doc
+
+    return dataset.map(_helper) # returns back a datasets.Dataset object
  
 def doc_to_choice(doc) -> str:
    return [f"{choice['marker']}. {choice['text']}" for choice in doc['answers']]
