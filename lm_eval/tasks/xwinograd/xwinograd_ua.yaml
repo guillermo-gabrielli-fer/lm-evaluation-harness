@@ -1,0 +1,4 @@
+dataset_name: ua
+include: xwinograd_common_yaml
+dataset_path: PolyAgent/wsc-ua
+task: xwinograd_ua
