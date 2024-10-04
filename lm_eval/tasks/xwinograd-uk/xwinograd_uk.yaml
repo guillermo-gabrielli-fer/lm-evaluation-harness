@@ -1,0 +1,4 @@
+dataset_name: null
+include: xwinograd_common_yaml
+dataset_path: PolyAgent/xwinograd_uk
+task: xwinograd_uk
