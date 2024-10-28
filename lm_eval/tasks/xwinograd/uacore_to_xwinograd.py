@@ -83,7 +83,10 @@ def convert_to_xwinograd(input_file: Path) -> pd.DataFrame:
                 'answer': str(entry['label'] + 1)  # Convert 0-indexed to 1-indexed
             })
 
-    return pd.DataFrame(data)
+    df = pd.DataFrame(data)
+    for col in ['sentence', 'option1', 'option2', 'answer']:
+        df[col] = df[col].astype(str)
+    return df
 
 def main() -> None:
     """Main function to execute the conversion."""
@@ -92,13 +95,17 @@ def main() -> None:
         args.output = args.input.with_suffix('.xlsx')  # Default output name
 
     xwinograd_df = convert_to_xwinograd(args.input)
+    print(xwinograd_df.columns)
+    # 
     xwinograd_df.to_excel(args.output, index=False)
     dataset = Dataset.from_pandas(xwinograd_df)
     dataset = DatasetDict({'test': dataset})
 
     logging.info(f'Successfully saved the converted dataset to {args.output}')
     login(new_session=True)
-    dataset.push_to_hub("PolyAgent/xwinograd_uk",private=True)
+    DATASET_ID = "PolyAgent/xwinograd_uk"
+    logging.info(f"Pushing dataset to hub as {DATASET_ID}")
+    dataset.push_to_hub(DATASET_ID,private=True)
 
 if __name__ == '__main__':
     main()
