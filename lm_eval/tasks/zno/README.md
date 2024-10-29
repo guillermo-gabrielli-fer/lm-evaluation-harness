@@ -1,5 +1,14 @@
 # Task-name
 
+ZNO - History: zno-history
+ZNO - Literature: zno-literature
+ZNO - Language: zno-language
+
+Use the benc as:
+```
+lm-eval --device cuda:0 --task zno-history,zno-language,zno-literature --model hf --model_args pretrained=MODEL,dtype=bfloat16 --apply_chat_template --output_path $OUTPUT_DIR --log_samples
+```
+
 ### Paper
 
 Title: `paper titles goes here`
