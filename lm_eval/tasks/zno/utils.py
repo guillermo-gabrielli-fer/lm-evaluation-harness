@@ -40,7 +40,6 @@ def process_docs(dataset: datasets.Dataset):
 }
 """
  
-# Hardcode for now, figure out how to make two tasks later
 MODE = 'marker' # 'marker', 'text', or 'both'
 
 def doc_to_choice(doc,mode='marker') -> str:
