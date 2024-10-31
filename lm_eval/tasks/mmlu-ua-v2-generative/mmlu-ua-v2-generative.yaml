@@ -1,0 +1,44 @@
+task: mmlu-ua-v2-generative
+tag:
+  - mmlu
+  - multilingual
+  - ukrainian
+  - uk
+  - ua
+dataset_path: PolyAgent/mmlu # a copy of `cais/mmlu` with no auxiliary_train split
+test_split: test
+fewshot_split: null #<split name to draw fewshot examples from, or `null`>
+fewshot_config:
+  sampler: first_n
+output_type: generate_until
+# There doesn't seem to be a significant difference between adding or not a prefix
+#doc_to_text: "Ти повинен вибрати єдиний правильний варіант.\nЗапитання: {{question.strip()}}\nА. {{choices[0]}}\nБ. {{choices[1]}}\nВ. {{choices[2]}}\nГ. {{choices[3]}}\nВідповідь:"
+#doc_to_text: "Запитання:\n{{question.strip()}}\nА. {{choices[0]}}\nБ. {{choices[1]}}\nВ. {{choices[2]}}\nГ. {{choices[3]}}\nВідповідь:"
+doc_to_text: "{{question.strip()}}\nА. {{choices[0]}}\nБ. {{choices[1]}}\nВ. {{choices[2]}}\nГ. {{choices[3]}}\nВідповідь:"
+doc_to_target: "{{['А.', 'Б.', 'В.', 'Г.'][answer]}}"
+filter_list:
+  - name: "strict-match"
+    filter:
+      - function: "take_first"
+  - name: "flexible-extract"
+    filter:
+      - function: "multi_choice_regex"
+        group_select: 0
+        regex_pattern: "([А-Г]\\.)"
+        ignore_case: true
+        ignore_punctuation: true
+      - function: "take_first"
+generation_kwargs:
+  until:
+    - "</s>"
+    - "Q:"
+    - "<|im_end|>"
+    - "\n"
+metric_list:
+  - metric: exact_match
+    aggregation: mean
+    higher_is_better: true
+metadata:
+  version: 3.0
+dataset_kwargs:
+  trust_remote_code: true

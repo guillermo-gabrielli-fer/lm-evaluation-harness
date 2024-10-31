@@ -2,6 +2,7 @@ from . import (
     anthropic_llms,
     api_models,
     dummy,
+    gemini_openai_endpoint,
     gguf,
     hf_vlms,
     huggingface,
@@ -13,7 +14,7 @@ from . import (
     optimum_lm,
     textsynth,
     vllm_causallms,
-    vllm_vlms,
+    vllm_vlms
 )
 
 
